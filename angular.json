@@ -100,8 +100,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "party2gether-fe:build:production",
+            "firebaseProject": "party2gether-b71a8",
+            "firebaseHostingSite": "party2gether-b71a8"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "party2gether-b71a8": {
+      "hosting": {
+        "party2gether-fe": [
+          "party2gether-b71a8"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "party2gether-b71a8"
+  }
+}
