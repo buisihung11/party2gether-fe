@@ -1,1 +1,107 @@
-<p>signup works!</p>
+<div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+  <div class="text-center mb-5">
+    <span
+      style="background-color: #ccc; padding: 24px; display: inline-block"
+      class="mb-2"
+      >Logo</span
+    >
+    <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+    <span class="text-600 font-medium line-height-3"
+      >Don't have an account?</span
+    >
+    <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+      >Create today!</a
+    >
+  </div>
+
+  <div>
+    <form
+      class="flex flex-column gap-2"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div>
+        <label for="email1" class="block text-900 font-medium mb-2"
+          >Email</label
+        >
+        <input
+          id="email1"
+          type="text"
+          pInputText
+          class="w-full"
+          formControlName="email"
+        />
+        <small
+          *ngIf="email?.dirty && (email?.errors?.['email'] || email?.errors?.['required'])"
+          id="username-help"
+          class="p-error"
+          >Email is required</small
+        >
+      </div>
+      <div>
+        <label for="password1" class="block text-900 font-medium mb-2"
+          >Password</label
+        >
+        <input
+          id="password1"
+          type="password"
+          pInputText
+          class="w-full"
+          formControlName="password"
+        />
+        <small
+          *ngIf="password?.dirty && (password?.errors?.['required'] || password?.errors?.['minlength'])"
+          id="password-help"
+          class="p-error"
+          >Password is required and must be at least 6 characters.</small
+        >
+      </div>
+      <div>
+        <label for="confirmPasswrod" class="block text-900 font-medium mb-2"
+          >Confirm Password</label
+        >
+        <input
+          id="confirmPasswrod"
+          type="password"
+          pInputText
+          class="w-full"
+          formControlName="confirmPassword"
+        />
+        <small
+          *ngIf="
+            signUpForm.dirty &&
+            password?.dirty &&
+            confirmPassword?.dirty &&
+            signUpForm.hasError('notSame')
+          "
+          id="confirmPasswrod-help"
+          class="p-error"
+          >Password does not match.</small
+        >
+      </div>
+      <div class="flex align-items-center justify-content-between mb-6">
+        <div class="flex align-items-center">
+          <p-checkbox
+            id="rememberme1"
+            [binary]="true"
+            styleClass="mr-2"
+          ></p-checkbox>
+          <label for="rememberme1" class="text-900">Remember me</label>
+        </div>
+        <a
+          class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+          >Forgot password?</a
+        >
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!signUpForm.valid"
+        pButton
+        label="Sign In"
+        icon="pi pi-user"
+        class="w-full"
+      ></button>
+    </form>
+  </div>
+</div>

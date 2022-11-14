@@ -10,14 +10,32 @@ import { CreatePartyComponent } from './create-party/create-party.component';
 import { HeaderComponent } from './header/header.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SignupComponent } from './signup/signup.component';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, HeaderComponent, HomepageComponent, CreatePartyComponent],
+  declarations: [
+    AppComponent,
+    SignupComponent,
+    HeaderComponent,
+    HomepageComponent,
+    CreatePartyComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ButtonModule,
+    ToolbarModule,
+    CheckboxModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    MessageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent],
