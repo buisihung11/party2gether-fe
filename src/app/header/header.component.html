@@ -2,18 +2,24 @@
   <p-toolbar>
     <div class="p-toolbar-group-left">Party2Gether</div>
     <div class="p-toolbar-group-right gap-3">
-      <a
-        routerLink="/singup"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-        >Signup</a
-      >
-      <a
-        routerLink="/login"
-        routerLinkActive="inactive"
-        ariaCurrentWhenActive="page"
-        >Login</a
-      >
+      <div *ngIf="!user">
+        <a
+          routerLink="/user/signup"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Signup</a
+        >
+        <a
+          routerLink="/user/signin"
+          routerLinkActive="inactive"
+          ariaCurrentWhenActive="page"
+          >Login</a
+        >
+      </div>
+      <div *ngIf="user">
+        <p-avatar class="cursor-pointer"  (click)="menu.toggle($event)" [image]="user?.photoURL" shape="circle"></p-avatar>
+        <p-menu #menu [popup]="true" [model]="items"></p-menu>
+      </div>
     </div>
   </p-toolbar>
 </nav>

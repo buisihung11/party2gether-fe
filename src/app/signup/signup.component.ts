@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseError } from '@angular/fire/app';
 import {
   FormControl,
   FormGroup,
@@ -7,6 +8,7 @@ import {
   ValidationErrors,
   AbstractControl,
 } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +16,9 @@ import {
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  isRegitering = false;
+  registerError: null | string = null;
+
   signUpForm = new FormGroup(
     {
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -26,19 +31,37 @@ export class SignupComponent implements OnInit {
     { validators: this.checkConfirmPassword }
   );
 
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
-    console.log(this.signUpForm);
-    console.log(this.signUpForm.value);
+  async onSubmit() {
+    const registerData = this.signUpForm.value;
+    try {
+      this.isRegitering = true;
+      this.registerError = null;
+
+      await this.authService.registerWithEmailPassword(
+        registerData.email!,
+        registerData.password!
+      );
+    } catch  (err) {
+      const error = err as FirebaseError;
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode == 'auth/weak-password') {
+        this.registerError = 'Week Password';
+      } else {
+        this.registerError = errorMessage;
+      }
+    } finally {
+      this.isRegitering = false;
+    }
   }
 
   checkConfirmPassword(group: AbstractControl): ValidationErrors | null {
     let pass = group.get('password')?.value;
     let confirmPass = group.get('confirmPassword')?.value;
-    console.log('pass', pass, confirmPass);
     return pass === confirmPass ? null : { notSame: true };
   }
 

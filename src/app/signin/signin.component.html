@@ -7,19 +7,19 @@
         >Logo</span
       >
     </a>
-    <div class="text-900 text-3xl font-medium mb-3">Sign Up</div>
+    <div class="text-900 text-3xl font-medium mb-3">Welcome back</div>
     <span class="text-600 font-medium line-height-3"
-      >Already have an account?</span
+      >Dont have an account?</span
     >
-    <a routerLink="/user/signin" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
-      >Login</a
+    <a routerLink="/user/signup" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+      >Sign Up</a
     >
   </div>
 
   <div>
     <form
       class="flex flex-column gap-2"
-      [formGroup]="signUpForm"
+      [formGroup]="signInForm"
       (ngSubmit)="onSubmit()"
     >
       <div>
@@ -58,38 +58,15 @@
           >Password is required and must be at least 6 characters.</small
         >
       </div>
-      <div>
-        <label for="confirmPasswrod" class="block text-900 font-medium mb-2"
-          >Confirm Password</label
-        >
-        <input
-          id="confirmPasswrod"
-          type="password"
-          pInputText
-          class="w-full"
-          formControlName="confirmPassword"
-        />
-        <small
-          *ngIf="
-            signUpForm.dirty &&
-            password?.dirty &&
-            confirmPassword?.dirty &&
-            signUpForm.hasError('notSame')
-          "
-          id="confirmPasswrod-help"
-          class="p-error"
-          >Password does not match.</small
-        >
-      </div>
-      <p-message *ngIf="registerError" severity="error" [text]="registerError!"></p-message>
+      <p-message *ngIf="loginError" severity="error" [text]="loginError!"></p-message>
       <button
         type="submit"
-        [disabled]="!signUpForm.valid"
+        [disabled]="!signInForm.valid"
         pButton
-        label="Sign Up"
+        label="Log in"
         icon="pi pi-user"
         class="w-full mt-4"
-        [loading]="isRegitering"
+        [loading]="isLogin"
       ></button>
     </form>
   </div>
