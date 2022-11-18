@@ -14,7 +14,7 @@ import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
 import { LoginLayoutComponent } from './_layout/login-layout/login-layout.component';
 
 const redirectLoggedInToHomePage = () => redirectLoggedInTo(['homepage']);
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['user/login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['user','signin']);
 
 const routes: Routes = [
   {
